@@ -1,26 +1,61 @@
 # What's New?
 
-## 1.1.8
+## 2.0.1
 
-- Added `Clean All` command to clean up whole project
-- Added arguments forwarding from `launch.json` file for running target
+- Fixed the documentation links.
 
-## 1.1.7
+## 2.0.0
 
-- Added `custom_properties` field for configurations in `qbs-configurations.json`.
-- Added `qbs.getConfigurationCustomProperty` command substitution.
-- Added `qbs.getPathFromConanBuildInfo` command substitution.
+- The extension code has been completely refactored, which may
+break the compatibility with the previous 1.x. versions.
+- [#21](https://github.com/denis-shienkov/vscode-qbs/issues/21)
+Added `Run` context menu for the product in the project tree
+to launch the product in the terminal.
+- [#21](https://github.com/denis-shienkov/vscode-qbs/issues/21)
+Added `Debug` context menu for the product in the project tree
+to debug the product.
+- Updated the nodes icons in the project tree.
+- Updated the documentation.
+- Changed the set of a commands and their names.
+- Added new **Qbs: Edit Launch Configurations** command to edit
+the `launch.json` file.
+- Added new **Qbs: Scan Launch Configurations** command to update
+the launch configurations selection entries.
+- Added new **Qbs: Edit Build Configurations** command to edit
+the `qbs-configurations.json` file.
+- Added new **Qbs: Scan Build Configurations** command to update
+the build configurations selection entries.
+- Added new **Qbs: Scan Build Profiles** command which calls
+the Qbs executable to scan the available Qbs build profiles
+(aka toolchains).
+- Implemented compilation for single source file, selected from
+the project explorer tree.
+- Added new `installAfterBuild` Qbs extension setting.
+- Right now it is possible to select the default build profile
+from the build profiles selector.
 
-## 1.1.6
+## 1.0.7
 
-- Added `buildRunSameTarget` and `buildBeforeRun` options in settings.
-- Added `autoResolve` option in settings.
-- Added `profile` field for configurations in `qbs-configurations.json`.
-- Added `qbs.profileName`, `qbs.configurationName`, `qbs.buildDirectoryUnresolved` command substitutions.
+- [#69](https://github.com/denis-shienkov/vscode-qbs/issues/69)
+Added the new setting `qbs.saveBeforeBuild` for saving the open
+documents before resolving or building.
+- [#63](https://github.com/denis-shienkov/vscode-qbs/issues/63)
+Added the new setting `qbs.autoResolve` to control the automatic
+resolving of a project when its build files are modified.
+- [#64](https://github.com/denis-shienkov/vscode-qbs/issues/64)
+Added the new setting `qbs.buildBeforeRun` to control the build
+stage of the product before it launches.
+- Implemented redirection of messages when detecting profiles to
+the Qbs channel.
+- Profiles detection command added to the profile selector as
+the first `[Detect profiles]` item.
+- Right now the Qbs configuration entry name replaced with the
+`Qbs Tools`.
 
 ## 1.0.6
 
-- [#60] Added the command substitutions such as `qbs.getBuildDirectory`
+- [#60] (https://github.com/denis-shienkov/vscode-qbs/issues/60)
+Added the command substitutions such as `qbs.getBuildDirectory`
 and `qbs.getSelectedProductPath`.
 
 ## 1.0.5
@@ -89,8 +124,8 @@ echo mode` and makes as enumeration to support all modes such as
 `command-line`, `command-line-with-environment`, `silent`, and
 `summary`.
 - [#46](https://github.com/denis-shienkov/vscode-qbs/issues/46)
-Right now the QBS messaging console has been removed and all QBS
-messages are now forwarded to the QBS build console.
+Right now the Qbs messaging console has been removed and all Qbs
+messages are now forwarded to the Qbs build console.
 - [#48](https://github.com/denis-shienkov/vscode-qbs/issues/48)
 Added the new setting `qbs.clearOutputBeforeOperation` for cleaning
 the output console before resolving, cleaning, or building.
@@ -111,7 +146,7 @@ Right now it is possible to override the project properties which
 are located in the `overriden-properties.json` file,  using the
 `Override Project Properties` command.
 - [#33](https://github.com/denis-shienkov/vscode-qbs/issues/33)
-Rignt now the unreferenced QBS files are displayed in the project
+Rignt now the unreferenced Qbs files are displayed in the project
 tree under the `Qbs files` node.
 - [#34](https://github.com/denis-shienkov/vscode-qbs/issues/34)
 Added integration of the `problems` panel with Qbs warning messages.
@@ -144,9 +179,9 @@ Now, the macros and other properties from the groups are processed.
 
 - Next developer preview release.
 - [#22](https://github.com/denis-shienkov/vscode-qbs/issues/22)
-Implemented opening of QBS files with a specified line number.
+Implemented opening of Qbs files with a specified line number.
 - [#14](https://github.com/denis-shienkov/vscode-qbs/issues/14)
-Implemented highlighting for QBS files.
+Implemented highlighting for Qbs files.
 - [#23](https://github.com/denis-shienkov/vscode-qbs/issues/23)
 Implemented saving of the selected debugger.
 
@@ -177,12 +212,12 @@ products) using the status bar button.
 running using the status bar button.
 - Implemented selection of the desired debugger configuration
 (specifies in the `launch.json` file).
-- Implemented a basic set of QBS properties as the extension settings.
+- Implemented a basic set of Qbs properties as the extension settings.
 - Implemented the intelli sense highlighting of the source code.
 - Added minimal basic documentation set.
 - Implemented the progress bars indicating the `resolve`, `build`,
 `clean`, and `install` operations.
 - Implemented the progress bar indicating the session status.
-- Added two output panes for the QBS compile and trace outputs.
+- Added two output panes for the Qbs compile and trace outputs.
 - Implemented the run terminal.
 - Implemented the debugger engine support.

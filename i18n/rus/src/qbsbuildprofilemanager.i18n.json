@@ -1,0 +1,14 @@
+{
+    "qbs.buildprofile.unknown": "неизвестно",
+    "qbs.buildprofilemanager.default.select.description": "Профиль по умолчанию \"{0}\"",
+    "qbs.buildprofilemanager.default.select.label": "По умолчанию",
+    "qbs.buildprofilemanager.scan.log.finished": "Сканирование профилей сборки завершено",
+    "qbs.buildprofilemanager.scan.log.started": "Запуск сканирования профилей сборки...",
+    "qbs.buildprofilemanager.scan.progress.completed.message": "Успешно завершено",
+    "qbs.buildprofilemanager.scan.progress.failed.message": "Завершено с ошибкой: {0}",
+    "qbs.buildprofilemanager.scan.progress.title": "Сканирование профилей сборки",
+    "qbs.buildprofilemanager.scan.select.description": "Сканировать доступные профили сборки",
+    "qbs.buildprofilemanager.scan.select.label": "[Сканировать профили сборки]",
+    "qbs.buildprofilemanager.select.description1": "Архитектура \"{0}\", тип \"{1}\"",
+    "qbs.buildprofilemanager.select.description2": "Базовый профиль \"{0}\""
+}
