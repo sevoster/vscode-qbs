@@ -17,6 +17,7 @@ export namespace QbsSettings {
     /** Set of all unique Qbs extension settings sections defined in the `package.json` file. */
     export enum SettingKey {
         AutoResolve = 'autoResolve',
+        BuildRunTheSameTarget = 'buildAndRunTheSameTarget',
         BuildBeforeRun = 'buildBeforeRun',
         BuildConfigurationsFilePath = 'buildConfigurationsFilePath',
         BuildDirectory = 'buildDirectory',
@@ -106,6 +107,8 @@ export namespace QbsSettings {
     export function getAutoResolve(): boolean { return getBoolean(SettingKey.AutoResolve, true); }
 
     export function getBuildBeforeRun(): boolean { return getBoolean(SettingKey.BuildBeforeRun, true); }
+
+    export function getBuildAndRunTheSameTarget(): boolean { return getBoolean(SettingKey.BuildRunTheSameTarget, false); }
 
     export function getInstallAfterBuild(): boolean { return getBoolean(SettingKey.InstallAfterBuild, true); }
 

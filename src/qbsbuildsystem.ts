@@ -125,6 +125,10 @@ export class QbsBuildSystem implements vscode.Disposable {
                 const productNames = QbsBuildSystem.getCommandProductNames(data);
                 await this.cleanWithProgress(productNames, QbsBuildSystemTimeout.Progress);
             }));
+        context.subscriptions.push(vscode.commands.registerCommand(QbsCommandKey.CleanAll,
+            async (_data) => {
+                await this.cleanWithProgress([], QbsBuildSystemTimeout.Progress);
+            }));
 
         // Rebuild commands.
         context.subscriptions.push(vscode.commands.registerCommand(QbsCommandKey.RebuildProduct,
@@ -981,7 +985,7 @@ export class QbsBuildSystem implements vscode.Disposable {
         return fsPath;
     }
 
-    private static getBuildRootDirectoryPathFromSettings(): string | undefined {
+    public static getBuildRootDirectoryPathFromSettings(): string | undefined {
         return QbsBuildSystem.getFullPathFromSettings(QbsSettings.getBuildDirectory());
     }
 

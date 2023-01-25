@@ -10,4 +10,5 @@ export enum QbsLaunchConfigurationKey {
     Program = 'program',
     Request = 'request',
     Type = 'type',
+    Args = 'args'
 }

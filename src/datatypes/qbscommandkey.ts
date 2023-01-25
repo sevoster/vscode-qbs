@@ -33,4 +33,11 @@ export enum QbsCommandKey {
     StartSession = 'qbs.startSession',
     StartupCppCodeModel = 'qbs.startupCppCodeModel',
     StopSession = 'qbs.stopSession',
+
+    CleanAll = 'qbs.cleanAll',
+    GetProfileName = 'qbs.getProfileName',
+    GetConfigurationName = 'qbs.getConfigurationName',
+    GetPathFromConanBuildInfo = 'qbs.getPathFromConanBuildInfo',
+    GetConfigurationCustomProperty = 'qbs.getConfigurationCustomProperty',
+    GetBuildDirectory = 'qbs.getBuildDirectory'
 }

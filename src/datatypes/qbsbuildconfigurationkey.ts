@@ -4,4 +4,6 @@ export enum QbsBuildConfigurationKey {
     DisplayName = 'displayName',
     Name = 'name',
     Properties = 'properties',
+    Profile = 'profile',
+    CustomProperties = 'custom_properties'
 }

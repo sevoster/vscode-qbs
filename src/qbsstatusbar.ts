@@ -10,6 +10,7 @@ import { QbsCommandKey } from './datatypes/qbscommandkey';
 import { QbsLaunchConfigurationManager } from './qbslaunchconfigurationmanager';
 import { QbsProjectManager } from './qbsprojectmanager';
 import { QbsSessionState } from './qbssession';
+import { QbsSettings } from './qbssettings';
 
 const localize = nls.config({ messageFormat: nls.MessageFormat.file })();
 
@@ -38,6 +39,8 @@ class Button {
 
     public setColor(color: string): void { this.button.color = color; }
     public setTooltip(tooltip: string) { this.button.tooltip = tooltip; }
+
+    public setVisible(visible: boolean): void { visible ? this.button.show() : this.button.hide(); }
 }
 
 class SessionStatusButton extends Button {
@@ -208,6 +211,7 @@ class SelectBuildProductButton extends Button {
             this.disposable2 = project?.onProjectDataChanged(async () => this.update());
             this.update();
         });
+        QbsSettings.observeSetting(QbsSettings.SettingKey.BuildRunTheSameTarget, async () => this.update());
         this.update();
     }
 
@@ -221,6 +225,7 @@ class SelectBuildProductButton extends Button {
         const product = QbsProjectManager.getInstance().getProject()?.findProduct(value);
         const fullName = product?.getName();
         this.setText(fullName);
+        this.setVisible(!QbsSettings.getBuildAndRunTheSameTarget());
     }
 }
 

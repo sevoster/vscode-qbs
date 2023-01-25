@@ -8,6 +8,7 @@ import { QbsBuildSystemTimeout } from './qbsbuildsystem';
 import { QbsCommandKey } from './datatypes/qbscommandkey';
 import { QbsProtocolProductData } from './protocol/qbsprotocolproductdata';
 import { QbsProtocolProjectData } from './protocol/qbsprotocolprojectdata';
+import { QbsSettings } from './qbssettings';
 
 export class QbsProject implements vscode.Disposable {
     private projectData?: QbsProtocolProjectData; // Fills from the resolve or build stage.
@@ -37,7 +38,12 @@ export class QbsProject implements vscode.Disposable {
     public readonly onOperationCompleted: vscode.Event<void> = this.operationCompleted.event;
     public readonly onProjectDataChanged: vscode.Event<QbsProtocolProjectData | undefined> = this.projectDataChanged.event;
 
-    public constructor(private readonly fsPath: string) { }
+    public constructor(private readonly fsPath: string) {
+        QbsSettings.observeSetting(QbsSettings.SettingKey.BuildRunTheSameTarget, async () => {
+            if (QbsSettings.getBuildAndRunTheSameTarget())
+                this.setBuildProductName(this.getLaunchProductName());
+        })
+    }
 
     public dispose() { this.buildSystemFilesWatcher?.dispose(); }
 
@@ -114,6 +120,9 @@ export class QbsProject implements vscode.Disposable {
     }
 
     public setLaunchProductName(launchProductName?: string): void {
+        if (QbsSettings.getBuildAndRunTheSameTarget())
+            this.setBuildProductName(launchProductName);
+
         this.launchProductName = launchProductName;
         this.launchProductNameChanged.fire(this.launchProductName);
         vscode.commands.executeCommand(QbsCommandKey.SaveProject);

@@ -19,6 +19,7 @@ import { QbsProject } from './qbsproject';
 import { QbsProtocolProductData } from './protocol/qbsprotocolproductdata';
 import { QbsProtocolRunEnvironmentData } from './protocol/qbsprotocolrunenvironmentdata';
 import { QbsSettings } from './qbssettings';
+import * as extraCommands from './qbsextracommands';
 
 const localize = nls.config({ messageFormat: nls.MessageFormat.file })();
 
@@ -107,6 +108,22 @@ export class QbsProjectManager implements vscode.Disposable {
                     throw new Error('Selected product target executable is undefined');
                 return fsPath;
             }));
+
+        // Extra commands
+        context.subscriptions.push(vscode.commands.registerCommand(QbsCommandKey.GetBuildDirectory,
+            async () => extraCommands.getBuildDirectory()));
+        context.subscriptions.push(vscode.commands.registerCommand(QbsCommandKey.GetConfigurationName,
+            async () => extraCommands.getConfigurationName()));
+        context.subscriptions.push(vscode.commands.registerCommand(QbsCommandKey.GetProfileName,
+            async () => extraCommands.getProfileName()));
+        context.subscriptions.push(vscode.commands.registerCommand(QbsCommandKey.GetConfigurationCustomProperty,
+            async (property: string) => extraCommands.getConfigurationCustomProperty(property)));
+        context.subscriptions.push(vscode.commands.registerCommand(QbsCommandKey.GetPathFromConanBuildInfo,
+            async (args: Array<string>) => {
+                const section = args[0];
+                const option = args[1];
+                return extraCommands.getPathFromConanBuildInfo(section, option);
+            }));
     }
 
     // Selectet build profile.
@@ -120,6 +137,8 @@ export class QbsProjectManager implements vscode.Disposable {
     private subscribeBuildConfifurationsChanges() {
         QbsBuildConfigurationManager.getInstance().onConfigurationSelected(async (configuration) => {
             this.project?.setConfigurationName(configuration.name);
+            if (configuration.profile)
+                this.project?.setProfileName(configuration.profile);
         });
 
         QbsBuildConfigurationManager.getInstance().onUpdated(async () => {
@@ -205,6 +224,10 @@ export class QbsProjectManager implements vscode.Disposable {
             return false;
         console.log('Running product: ' + productName + ', executable: ' + executable);
 
+        const configurationName = QbsProjectManager.getInstance().getProject()?.getDebuggerName();
+        let configuration = QbsLaunchConfigurationManager.getInstance().findConfiguration(configurationName);
+        const args = configuration?.getArgs();
+
         const env = await QbsBuildSystem.getInstance().fetchProductRunEnvironment(productName);
         const terminal = vscode.window.createTerminal({
             name: 'QBS Run',
@@ -219,8 +242,9 @@ export class QbsProjectManager implements vscode.Disposable {
                     terminal.sendText(`export ${specialEnv}=${escapeShell(env[specialEnv])}`);
             }
         }
-        const program = escapeShell(executable);
-        terminal.sendText(program);
+
+        const command = [executable].concat(args || []).map((x) => escapeShell(x)).join(' ');
+        terminal.sendText(command);
         terminal.show();
         return true;
     }

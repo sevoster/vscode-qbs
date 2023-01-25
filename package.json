@@ -75,6 +75,11 @@
                 "category": "Qbs"
             },
             {
+                "command": "qbs.cleanAll",
+                "title": "%qbs-tools.command.qbs.cleanAll.title%",
+                "category": "Qbs"
+            },
+            {
                 "command": "qbs.compileOnly",
                 "title": "%qbs-tools.command.qbs.compileOnly.title%",
                 "category": "Qbs"
@@ -206,6 +211,10 @@
                 },
                 {
                     "command": "qbs.cleanProduct",
+                    "when": "qbs:extension-activated"
+                },
+                {
+                    "command": "qbs.cleanAll",
                     "when": "qbs:extension-activated"
                 },
                 {
@@ -477,18 +486,6 @@
                     "default": false,
                     "description": "%qbs-tools.configuration.qbs.buildAndRunTheSameTarget.description%",
                     "scope": "resource"
-                },
-                "qbs.buildBeforeRun": {
-                    "type": "boolean",
-                    "default": false,
-                    "markdownDescription": "%qbs-tools.configuration.qbs.buildBeforeRun.description%",
-                    "scope": "resource"
-                },
-                "qbs.autoResolve": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Run QBS Resolve command automatically when changes in qbs files detected.",
-                    "scope": "resource"
                 }
             }
         },
@@ -538,6 +535,7 @@
         "vscode-nls-dev": "^3.3.2"
     },
     "dependencies": {
+        "ini": "^3.0.0",
         "chokidar": "^3.4.3",
         "jsonc-parser": "^3.0.0",
         "uuid": "^9.0.0",

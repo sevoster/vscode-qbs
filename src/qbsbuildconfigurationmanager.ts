@@ -103,7 +103,9 @@ export class QbsBuildConfigurationManager implements vscode.Disposable {
                             const display = entry[QbsBuildConfigurationKey.DisplayName];
                             const descr = entry[QbsBuildConfigurationKey.Description];
                             const props = entry[QbsBuildConfigurationKey.Properties];
-                            return new QbsBuildConfigurationData(name, display, descr, props);
+                            const profile = entry[QbsBuildConfigurationKey.Profile];
+                            const custom_props = entry[QbsBuildConfigurationKey.CustomProperties];
+                            return new QbsBuildConfigurationData(name, display, descr, props, profile, custom_props);
                         });
                     resolve(result);
                 }
