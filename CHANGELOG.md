@@ -1,5 +1,9 @@
 # What's New?
 
+## 2.0.2
+- Synced fork with upstream
+- Fixed issue with profile detection
+
 ## 2.0.1
 
 - Fixed the documentation links.
