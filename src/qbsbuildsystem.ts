@@ -756,9 +756,7 @@ export class QbsBuildSystem implements vscode.Disposable {
         return new Promise<any>(resolve => {
             const disposable = this.session.onRunEnvironmentReceived(async (result) => {
                 await disposable.dispose();
-                const environment = Object.entries(result.getData()).map(function ([k, v]) {
-                    return { name: k, value: v };
-                });
+                const environment = result.getData();
                 console.log('Received run environment for product: ' + productName + ' as ' + environment);
                 resolve(environment);
             });
