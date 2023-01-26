@@ -1,5 +1,8 @@
 # What's New?
 
+## 2.0.3
+- Fixed env passing to terminal on run
+
 ## 2.0.2
 - Synced fork with upstream
 - Fixed issue with profile detection
