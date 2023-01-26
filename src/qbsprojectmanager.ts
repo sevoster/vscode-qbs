@@ -29,7 +29,7 @@ interface QbsProductQuickPickItem extends vscode.QuickPickItem {
 
 export class QbsProjectManager implements vscode.Disposable {
     private static instance: QbsProjectManager;
-    private project?: QbsProject
+    private project?: QbsProject;
     private timer?: NodeJS.Timeout;
 
     private readonly projectOpen: vscode.EventEmitter<void> = new vscode.EventEmitter<void>();
@@ -229,8 +229,12 @@ export class QbsProjectManager implements vscode.Disposable {
         const args = configuration?.getArgs();
 
         const env = await QbsBuildSystem.getInstance().fetchProductRunEnvironment(productName);
+        const terminalName = 'QBS Run: ' + product.getName();
+
+        vscode.window.terminals.find((value: vscode.Terminal) => value.name === terminalName)?.dispose();
+
         const terminal = vscode.window.createTerminal({
-            name: 'QBS Run',
+            name: terminalName,
             env,
             cwd: product.getBuildDirectory()
         });
