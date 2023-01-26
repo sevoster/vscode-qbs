@@ -1,5 +1,9 @@
 # What's New?
 
+## 2.0.4
+- Close QBS Run terminal when running same target again
+- Change run terminal name to **QBS Run: target_name**
+
 ## 2.0.3
 - Fixed env passing to terminal on run
 
